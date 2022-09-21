@@ -1,7 +1,8 @@
 ﻿using System;
 using Project_CS.Player;
+using Project_CS.Loot;
 
-namespace Project_CS
+namespace Project_CS.State
 {
     public class ExploreState : IState
     {
@@ -38,8 +39,27 @@ namespace Project_CS
 
             if (random >= 0)
             {
-                Console.WriteLine("You found a treasure!");
-                return 2;
+                int randomLoot = new Random().Next(0, 10);
+                if (randomLoot > 6)
+                {
+                    Console.WriteLine("You found a potion!");
+                    context.AddLoot(new Potion());
+                    return 2;
+                }
+
+                if (randomLoot > 3)
+                {
+                    Console.WriteLine("You found a Discord Nitro membership!");
+                    context.AddLoot(new DiscordNitro());
+                    return 2;
+                }
+
+                if (randomLoot >= 0)
+                {
+                    Console.WriteLine("You found a deodorant!");
+                    context.AddLoot(new Deodorant());
+                    return 2;
+                }
             }
 
             return 0;
