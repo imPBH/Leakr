@@ -46,5 +46,35 @@
         {
             health = newHealth;
         }
+
+        public int GetLevel()
+        {
+            return level;
+        }
+
+        public int GetExp()
+        {
+            return exp;
+        }
+
+        public int GetHealth()
+        {
+            return health;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public IState GetExploreState()
+        {
+            return exploreState;
+        }
+
+        public IState GetBattleState()
+        {
+            return batttleState;
+        }
     }
 }
