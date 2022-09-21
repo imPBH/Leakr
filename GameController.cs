@@ -34,6 +34,14 @@ namespace Project_CS
                     Console.WriteLine("You gained " + points + " points!");
                 }
             }
+
+            if (score >= nextLevel)
+            {
+                player.UpdateLevel(player.GetLevel() + 1);
+                nextLevel += player.GetLevel() * 10;
+
+                Console.WriteLine("You leveled up! You are now level " + player.GetLevel());
+            }
         }
     }
 }
