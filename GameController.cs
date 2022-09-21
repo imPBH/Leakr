@@ -20,11 +20,15 @@ namespace Project_CS
                 Console.WriteLine("L = Look Around, A = Attack, Q = Quit");
                 Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,Q]: ");
                 
-
                 key = Console.ReadKey();
                 Console.Clear();
                 ExecuteChoice(key.Key);
-                
+            }
+
+            if (player.GetLevel() == 10)
+            {
+                Console.WriteLine();
+                Console.WriteLine("You win! Your score is " + score);
             }
         }
 
