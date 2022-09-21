@@ -8,6 +8,15 @@ namespace Project_CS
         static int score;
         static int nextLevel = 10;
 
+        public void Start()
+        {
+            Console.WriteLine("Welcome to the game!");
+            Console.WriteLine("Press any key to start");
+            Console.ReadKey();
+            Console.Clear();
+            ConsoleKeyInfo key = new ConsoleKeyInfo();
+        }
+
         private static void ExecuteChoice(ConsoleKey key)
         {
             if (key == ConsoleKey.L)
