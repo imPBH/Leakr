@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading;
+using Project_CS.Loot;
 using Project_CS.Player;
 
-namespace Project_CS
+namespace Project_CS.Game
 {
     public class GameController
     {
@@ -44,8 +45,8 @@ namespace Project_CS
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             while (key.Key != ConsoleKey.Q && player.GetLevel() < 10)
             {
-                Console.WriteLine("L = Look Around, A = Attack, Q = Quit");
-                Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,Q]: ");
+                Console.WriteLine("L = Look Around, A = Attack, S = Show Inventory, Q = Quit");
+                Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,S,Q]: ");
 
                 key = Console.ReadKey();
                 Console.Clear();
@@ -84,6 +85,10 @@ namespace Project_CS
                     score += points;
                     Console.WriteLine("You gained " + points + " points!");
                 }
+            }
+            else if (key == ConsoleKey.S)
+            {
+                player.ShowInventory();
             }
 
             if (score >= nextLevel)

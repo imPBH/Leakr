@@ -1,4 +1,9 @@
-﻿namespace Project_CS
+﻿using System;
+using System.Collections.Generic;
+using Project_CS.State;
+using Project_CS.Loot;
+
+namespace Project_CS.Player
 {
     public class PlayerController
     {
@@ -9,6 +14,7 @@
         private int exp;
         private int health;
         private string name = "";
+        Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
 
         public PlayerController()
         {
@@ -75,6 +81,52 @@
         public IState GetBattleState()
         {
             return batttleState;
+        }
+
+        public void AddLoot(ILoot loot)
+        {
+            if (inventory.Count == 0)
+            {
+                inventory.Add(loot, 1);
+            }
+            else
+            {
+                foreach (KeyValuePair<ILoot, int> item in inventory)
+                {
+                    if (item.Key.Name == loot.Name)
+                    {
+                        inventory[item.Key] += 1;
+                        return;
+                    }
+                }
+
+                inventory.Add(loot, 1);
+            }
+        }
+
+        public void RemoveLoot(ILoot loot)
+        {
+            foreach (KeyValuePair<ILoot, int> item in inventory)
+            {
+                if (item.Key.Name == loot.Name)
+                {
+                    inventory[item.Key] -= 1;
+                    if (inventory[item.Key] == 0)
+                    {
+                        inventory.Remove(item.Key);
+                    }
+
+                    return;
+                }
+            }
+        }
+
+        public void ShowInventory()
+        {
+            foreach (KeyValuePair<ILoot, int> loot in inventory)
+            {
+                Console.WriteLine(loot.Key.Name + " x" + loot.Value);
+            }
         }
     }
 }
