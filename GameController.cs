@@ -15,6 +15,17 @@ namespace Project_CS
             Console.ReadKey();
             Console.Clear();
             ConsoleKeyInfo key = new ConsoleKeyInfo();
+            while (key.Key != ConsoleKey.Q && player.GetLevel() < 10)
+            {
+                Console.WriteLine("L = Look Around, A = Attack, Q = Quit");
+                Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,Q]: ");
+                
+
+                key = Console.ReadKey();
+                Console.Clear();
+                ExecuteChoice(key.Key);
+                
+            }
         }
 
         private static void ExecuteChoice(ConsoleKey key)
