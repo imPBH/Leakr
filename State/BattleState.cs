@@ -1,7 +1,7 @@
 ﻿using System;
 using Project_CS.Player;
 
-namespace Project_CS
+namespace Project_CS.State
 {
     public class BattleState : IState
     {

@@ -1,4 +1,4 @@
-﻿namespace Project_CS
+﻿namespace Project_CS.State
 {
     public interface IState
     {
