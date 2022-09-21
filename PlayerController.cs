@@ -16,5 +16,15 @@
             batttleState = new BattleState(this);
             currentState = exploreState;
         }
+
+        public int Explore()
+        {
+            return currentState.Explore();
+        }
+
+        public int Battle()
+        {
+            return currentState.Battle();
+        }
     }
 }
