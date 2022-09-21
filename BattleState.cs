@@ -5,7 +5,7 @@ namespace Project_CS
     public class BattleState : IState
     {
         private PlayerController context;
-        private int round = 0;
+        private int round = 1;
 
         public BattleState(PlayerController context)
         {
