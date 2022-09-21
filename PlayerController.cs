@@ -26,5 +26,25 @@
         {
             return currentState.Battle();
         }
+
+        public void UpdateState(IState newState)
+        {
+            currentState = newState;
+        }
+
+        public void UpdateLevel(int newLevel)
+        {
+            level = newLevel;
+        }
+
+        public void UpdateExp(int newExp)
+        {
+            exp = newExp;
+        }
+
+        public void UpdateHealth(int newHealth)
+        {
+            health = newHealth;
+        }
     }
 }
