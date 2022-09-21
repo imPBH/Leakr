@@ -27,7 +27,7 @@ namespace Project_CS
             {
                 Console.WriteLine("You killed the enemy");
                 int tmp = round;
-                round = 0;
+                round = 1;
                 context.UpdateState(context.GetExploreState());
                 return tmp;
             }
