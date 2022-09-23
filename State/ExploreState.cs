@@ -39,7 +39,13 @@ namespace Project_CS.State
 
             if (random >= 0)
             {
-                int randomLoot = new Random().Next(0, 10);
+                int randomLoot = new Random().Next(0, 16);
+                if (randomLoot > 10)
+                {
+                    Console.WriteLine("You found a super potion!");
+                    context.AddLoot(new SuperPotion());
+                    return 2;
+                }
                 if (randomLoot > 6)
                 {
                     Console.WriteLine("You found a potion!");
@@ -80,5 +86,30 @@ namespace Project_CS.State
     .?^.J!          
      ~^.!!^         
 ";
+
+        public int UseItem()
+        {
+            if (context.GetInventory().Count == 0)
+            {
+                Console.WriteLine("You have no items to use");
+                return 0;
+            }
+
+            Console.WriteLine("Which item do you want to use?");
+            context.ShowInventory();
+            Console.Write("Your choice: ");
+            var choice = Console.ReadLine();
+            foreach (var item in context.GetInventory())
+            {
+                if (item.Key.Name == choice)
+                {
+                    item.Key.Use(context);
+                    return 1;
+                }
+            }
+
+            Console.WriteLine("Invalid choice");
+            return 0;
+        }
     }
 }

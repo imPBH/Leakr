@@ -1,3 +1,4 @@
+using System;
 using Project_CS.Player;
 
 namespace Project_CS.Loot
@@ -10,7 +11,9 @@ namespace Project_CS.Loot
 
         public override void Use(PlayerController player)
         {
+            Console.WriteLine("You healed 20 HP!");
             player.UpdateHealth(player.GetHealth() + 20);
+            this.Break(player);
         }
     }
 }

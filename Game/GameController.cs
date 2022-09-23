@@ -49,8 +49,8 @@ namespace Project_CS.Game
                 Console.WriteLine("______________________________________________");
                 Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | DEF: {player.GetDefense()} | CRED: 0 | $: {player.GetMoney()}" );
                 Console.WriteLine();
-                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, S = Shop Q = Quit");
-                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,Q]: ");
+                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop Q = Quit");
+                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,U,Q]: ");
 
                 key = Console.ReadKey();
                 Console.Clear();
@@ -91,6 +91,9 @@ namespace Project_CS.Game
             else if (key == ConsoleKey.S)
             {
                 Shop.Menu(player);
+            } else if (key == ConsoleKey.U)
+            {
+                player.UseItem();
             }
 
             if (score >= nextLevel)

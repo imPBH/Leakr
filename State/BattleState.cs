@@ -1,5 +1,6 @@
 ﻿using System;
 using Project_CS.Player;
+using Project_CS.Loot;
 
 namespace Project_CS.State
 {
@@ -17,7 +18,7 @@ namespace Project_CS.State
             this.context = context;
         }
 
-        public int Battle()
+        private void playerAttackAction()
         {
             Console.WriteLine("You attack the enemy");
             int ran = new Random().Next(0, 100);
@@ -31,6 +32,36 @@ namespace Project_CS.State
                 Console.WriteLine("You hit the enemy!");
                 successfullHits++;
             }
+        }
+
+        private void opponentAttackAction()
+        {
+            Console.WriteLine("The enemy attack you");
+            int ran = new Random().Next(0, 100);
+            if (ran <= context.GetDefense())
+            {
+                Console.WriteLine("You blocked the enemy attack");
+            }
+            else
+            {
+                context.UpdateHealth(context.GetHealth() - opponentAttack);
+                Console.WriteLine("The enemy hit you!");
+            }
+        }
+
+        public int Battle()
+        {
+            if (context.GetHealth() <= 0)
+            {
+                Console.WriteLine("You died");
+                context.UpdateState(context.GetExploreState());
+                round = 1;
+                successfullHits = 0;
+                opponentHealth = 100;
+                return 0;
+            }
+            
+            playerAttackAction();
 
             if (opponentHealth <= 0)
             {
@@ -43,17 +74,7 @@ namespace Project_CS.State
                 return tmp;
             }
 
-            Console.WriteLine("The enemy attack you");
-            ran = new Random().Next(0, 100);
-            if (ran <= context.GetDefense())
-            {
-                Console.WriteLine("You blocked the enemy attack");
-            }
-            else
-            {
-                context.UpdateHealth(context.GetHealth() - opponentAttack);
-                Console.WriteLine("The enemy hit you!");
-            }
+            opponentAttackAction();
 
             if (context.GetHealth() <= 0)
             {
@@ -96,5 +117,16 @@ namespace Project_CS.State
    7!      .^^                          
                                         
 ";
+
+        public int UseItem()
+        {
+            if (context.GetExploreState().UseItem() == 0)
+            {
+                return 0;
+            }
+            opponentAttackAction();
+            Console.WriteLine("You try to kill the enemy | ENEMY HEALTh: " + opponentHealth + "HP | ROUND " + round);
+            return 1;
+        }
     }
 }

@@ -12,12 +12,13 @@ namespace Project_CS.Loot
         public virtual int SellPrice { get; } = 3;
         public virtual void Use(PlayerController player)
         {
+            Console.WriteLine("You healed 10 HP!");
             player.UpdateHealth(player.GetHealth() + 10);
+            this.Break(player);
         }
 
         public void Break(PlayerController player)
         {
-            Console.WriteLine("Potion broke");
             player.RemoveLoot(this);
         }
     }

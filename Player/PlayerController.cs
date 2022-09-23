@@ -195,5 +195,10 @@ namespace Project_CS.Player
                 Console.WriteLine(loot.Key.Name + " x" + loot.Value);
             }
         }
+
+        public void UseItem()
+        {
+            currentState.UseItem();
+        }
     }
 }
