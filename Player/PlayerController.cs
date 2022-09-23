@@ -119,7 +119,7 @@ namespace Project_CS.Player
             {
                 if (item.Key.Name == loot.Name)
                 {
-                    inventory[item.Ke   y] -= 1;
+                    inventory[item.Key] -= 1;
                     stockInventory--;
                     if (inventory[item.Key] == 0)
                     {
