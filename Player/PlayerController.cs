@@ -119,19 +119,19 @@ namespace Project_CS.Player
             Console.WriteLine("What do you want to do ?");
             Console.WriteLine("1. Delete an item");
             Console.WriteLine("2. Don't take this item");
-            ConsoleKeyInfo key = new ConsoleKeyInfo;
+            ConsoleKeyInfo key = new ConsoleKeyInfo();
             key = Console.ReadKey();
-            switch (key)
+            switch (key.Key)
             {
                 case ConsoleKey.D1:
-                    Console.WriteLine("Which item do you want to delete");
+                    Shop.Sell(this);
                     return;
                 
                 case ConsoleKey.D2:
                     return;
 
                 default:
-                    Console.WriteLine("Invalid Input")
+                    Console.WriteLine("Invalid Input");
                     return;
             }
             }

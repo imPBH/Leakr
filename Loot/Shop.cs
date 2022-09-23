@@ -24,16 +24,17 @@ namespace Project_CS.Loot
             Console.WriteLine("2. Sell");
             Console.WriteLine("3. Leave");
             Console.Write("Your choice: ");
-            var choice = Console.ReadLine();
-            switch (choice)
+            ConsoleKeyInfo key = new ConsoleKeyInfo();
+            key = Console.ReadKey();
+            switch (key.Key)
             {
-                case "1":
+                case ConsoleKey.D1:
                     Buy(player);
                     break;
-                case "2":
+                case ConsoleKey.D2:
                     Sell(player);
                     break;
-                case "3":
+                case ConsoleKey.D3:
                     break;
                 default:
                     Console.WriteLine("Invalid choice");
@@ -73,7 +74,7 @@ namespace Project_CS.Loot
             Console.WriteLine($"You bought {wantedLoot.Name}");
         }
 
-        private static void Sell(PlayerController player)
+        public static void Sell(PlayerController player)
         {
             Console.WriteLine("What do you want to sell?");
             foreach (var playerLoot in player.GetInventory())
