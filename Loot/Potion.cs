@@ -10,6 +10,7 @@ namespace Project_CS.Loot
         public int Defense { get; } = 0;
         public virtual int BuyPrice { get; } = 6;
         public virtual int SellPrice { get; } = 3;
+        public int MaxUses { get; } = 999;
         public virtual void Use(PlayerController player)
         {
             Console.WriteLine("You healed 10 HP!");

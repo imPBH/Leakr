@@ -24,17 +24,16 @@ namespace Project_CS.Loot
             Console.WriteLine("2. Sell");
             Console.WriteLine("3. Leave");
             Console.Write("Your choice: ");
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-            key = Console.ReadKey();
-            switch (key.Key)
+            var choice = Console.ReadLine();
+            switch (choice)
             {
-                case ConsoleKey.D1:
+                case "1":
                     Buy(player);
                     break;
-                case ConsoleKey.D2:
+                case "2":
                     Sell(player);
                     break;
-                case ConsoleKey.D3:
+                case "3":
                     break;
                 default:
                     Console.WriteLine("Invalid choice");
@@ -46,6 +45,7 @@ namespace Project_CS.Loot
         private static void Buy(PlayerController player)
         {
             Console.WriteLine("What do you want to buy?");
+            Console.WriteLine("0. Back to home");
             foreach (var loot in availableLoot)
             {
                 Console.WriteLine($"{availableLoot.IndexOf(loot) + 1}. {loot.Name} - ${loot.BuyPrice}");
@@ -53,6 +53,11 @@ namespace Project_CS.Loot
 
             Console.Write("Your choice: ");
             var choice = Console.ReadLine();
+            if (choice == "0")
+            {
+                return;
+            }
+
             var lootIndex = int.Parse(choice) - 1;
             if (lootIndex < 0 || lootIndex >= availableLoot.Count)
             {
@@ -76,7 +81,14 @@ namespace Project_CS.Loot
 
         public static void Sell(PlayerController player)
         {
+            if (player.GetInventory().Count == 0)
+            {
+                Console.WriteLine("You don't have any loot to sell");
+                return;
+            }
+
             Console.WriteLine("What do you want to sell?");
+            Console.WriteLine("0. Back to home");
             foreach (var playerLoot in player.GetInventory())
             {
                 Console.WriteLine($"{playerLoot.Key.Name}. - ${playerLoot.Key.SellPrice}");
@@ -84,6 +96,10 @@ namespace Project_CS.Loot
 
             Console.Write("Your choice: ");
             var choice = Console.ReadLine();
+            if (choice == "0")
+            {
+                return;
+            }
 
             foreach (var playerLoot in player.GetInventory())
             {

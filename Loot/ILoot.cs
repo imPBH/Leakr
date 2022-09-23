@@ -9,6 +9,7 @@ namespace Project_CS.Loot
         public int Defense { get;}
         public int BuyPrice { get;}
         public int SellPrice { get;}
+        public int MaxUses { get;}
         public virtual void Use(PlayerController player)
         {
         }
@@ -16,5 +17,10 @@ namespace Project_CS.Loot
         public void Break(PlayerController player)
         {
         }
+        
+        public void AddSpentLife(PlayerController player)
+        {
+        }
+        
     }
 }

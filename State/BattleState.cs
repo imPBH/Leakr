@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Project_CS.Player;
 using Project_CS.Loot;
 
@@ -16,6 +18,15 @@ namespace Project_CS.State
         public BattleState(PlayerController context)
         {
             this.context = context;
+        }
+        
+        private void addSpentLifeToItems()
+        {
+            List<ILoot> items = context.GetWearingList().ToList();
+            foreach (var item in items)
+            {
+                item.AddSpentLife(context);
+            }
         }
 
         private void playerAttackAction()
@@ -47,6 +58,7 @@ namespace Project_CS.State
                 context.UpdateHealth(context.GetHealth() - opponentAttack);
                 Console.WriteLine("The enemy hit you!");
             }
+            addSpentLifeToItems();
         }
 
         public int Battle()

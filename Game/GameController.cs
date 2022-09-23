@@ -46,11 +46,11 @@ namespace Project_CS.Game
             while (key.Key != ConsoleKey.Q && player.GetLevel() < 10)
             {
                 Console.WriteLine(player.GetCurrentState().AsciiCharacter);
-                Console.WriteLine("______________________________________________");
-                Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | DEF: {player.GetDefense()} | CRED: 0 | $: {player.GetMoney()}" );
+                Console.WriteLine("________________________________________________________");
+                Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | ATK: {player.GetAttack()} | DEF: {player.GetDefense()} | CRED: 0 | $: {player.GetMoney()}" );
                 Console.WriteLine();
-                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop Q = Quit");
-                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,U,Q]: ");
+                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop, W = Wearing List, Q = Quit");
+                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,U,W,Q]: ");
 
                 key = Console.ReadKey();
                 Console.Clear();
@@ -94,6 +94,12 @@ namespace Project_CS.Game
             } else if (key == ConsoleKey.U)
             {
                 player.UseItem();
+            } else if (key == ConsoleKey.W)
+            {
+                foreach (var item in player.GetWearingList())
+                {
+                    Console.WriteLine(item);
+                }
             }
 
             if (score >= nextLevel)

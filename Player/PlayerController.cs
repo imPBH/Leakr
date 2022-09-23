@@ -19,7 +19,8 @@ namespace Project_CS.Player
         private int inventoryLimit = 15;
         private string name = "";
         private int money;
-        Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
+        private Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
+        private List<ILoot> wearingList = new List<ILoot>();
 
         public PlayerController()
         {
@@ -56,6 +57,16 @@ namespace Project_CS.Player
         public void UpdateHealth(int newHealth)
         {
             health = newHealth;
+        }
+        
+        public void UpdateAttack(int newAttack)
+        {
+            attack = newAttack;
+        }
+        
+        public void UpdateDefense(int newDefense)
+        {
+            defense = newDefense;
         }
 
         public int GetLevel()
@@ -199,6 +210,35 @@ namespace Project_CS.Player
         public void UseItem()
         {
             currentState.UseItem();
+        }
+        
+        public int WearItem(ILoot item)
+        {
+            int nbOfItem = 0;
+            foreach (var wearedItem in wearingList)
+            {
+                if (wearedItem.Name == item.Name)
+                {
+                    nbOfItem++;
+                }
+            }
+            if (nbOfItem >= item.MaxUses)
+            {
+                Console.WriteLine("You can't wear more than " + item.MaxUses + " " + item.Name);
+                return 0;
+            }
+            wearingList.Add(item);
+            return 1;
+        }
+        
+        public void RemoveWearingItem(ILoot item)
+        {
+            wearingList.Remove(item);
+        }
+        
+        public List<ILoot> GetWearingList()
+        {
+            return wearingList;
         }
     }
 }
