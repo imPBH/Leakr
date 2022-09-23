@@ -47,10 +47,10 @@ namespace Project_CS.Game
             {
                 Console.WriteLine(player.GetCurrentState().AsciiCharacter);
                 Console.WriteLine("______________________________________________");
-                Console.WriteLine("LVL: " + player.GetLevel() + " |  HP: 100 | DEF: 50 | CRED: 0 | $: 0" );
+                Console.WriteLine("LVL: " + player.GetLevel() + $" |  HP: 100 | DEF: 50 | CRED: 0 | $: {player.GetMoney()}" );
                 Console.WriteLine();
-                Console.WriteLine("L = Look Around, A = Attack, S = Show Inventory, Q = Quit");
-                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,S,Q]: ");
+                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, S = Shop Q = Quit");
+                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,Q]: ");
 
                 key = Console.ReadKey();
                 Console.Clear();
@@ -90,9 +90,13 @@ namespace Project_CS.Game
                     Console.WriteLine("You gained " + points + " points!");
                 }
             }
-            else if (key == ConsoleKey.S)
+            else if (key == ConsoleKey.I)
             {
                 player.ShowInventory();
+            }
+            else if (key == ConsoleKey.S)
+            {
+                Shop.Menu(player);
             }
 
             if (score >= nextLevel)

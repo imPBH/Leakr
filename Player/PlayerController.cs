@@ -14,6 +14,7 @@ namespace Project_CS.Player
         private int exp;
         private int health;
         private string name = "";
+        private int money;
         Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
 
         public PlayerController()
@@ -56,6 +57,26 @@ namespace Project_CS.Player
         public int GetLevel()
         {
             return level;
+        }
+        
+        public int GetMoney()
+        {
+            return money;
+        }
+        
+        public void RemoveMoney(int amount)
+        {
+            money -= amount;
+        }
+        
+        public void AddMoney(int amount)
+        {
+            money += amount;
+        }
+        
+        public Dictionary<ILoot, int> GetInventory()
+        {
+            return inventory;
         }
 
         public int GetExp()
