@@ -13,6 +13,7 @@ namespace Project_CS.Player
         private int level;
         private int exp;
         private int health;
+        private int stockInventory;
         private string name = "";
         Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
 
@@ -93,6 +94,7 @@ namespace Project_CS.Player
             if (inventory.Count == 0)
             {
                 inventory.Add(loot, 1);
+                stockInventory++;
             }
             else
             {
@@ -101,11 +103,13 @@ namespace Project_CS.Player
                     if (item.Key.Name == loot.Name)
                     {
                         inventory[item.Key] += 1;
+                        stockInventory++;
                         return;
                     }
                 }
 
                 inventory.Add(loot, 1);
+                stockInventory++;
             }
         }
 
@@ -115,7 +119,8 @@ namespace Project_CS.Player
             {
                 if (item.Key.Name == loot.Name)
                 {
-                    inventory[item.Key] -= 1;
+                    inventory[item.Ke   y] -= 1;
+                    stockInventory--;
                     if (inventory[item.Key] == 0)
                     {
                         inventory.Remove(item.Key);
