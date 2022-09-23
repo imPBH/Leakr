@@ -8,6 +8,8 @@ namespace Project_CS.Loot
         public virtual string Name { get; } = "Potion";
         public int Attack { get; } = 0;
         public int Defense { get; } = 0;
+        public virtual int BuyPrice { get; } = 6;
+        public virtual int SellPrice { get; } = 3;
         public virtual void Use(PlayerController player)
         {
             player.UpdateHealth(player.GetHealth() + 10);

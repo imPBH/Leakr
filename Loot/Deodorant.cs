@@ -8,6 +8,8 @@ namespace Project_CS.Loot
         public string Name { get; } = "Deodorant";
         public int Attack { get; } = 0;
         public int Defense { get; } = 2;
+        public int BuyPrice { get; } = 10;
+        public int SellPrice { get; } = 5;
 
         public void Use(PlayerController player)
         {
