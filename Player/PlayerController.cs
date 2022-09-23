@@ -9,7 +9,7 @@ namespace Project_CS.Player
     {
         private IState currentState;
         private IState exploreState;
-        private IState batttleState;
+        private IState battleState;
         private int level;
         private int exp;
         private int health = 100;
@@ -24,7 +24,7 @@ namespace Project_CS.Player
         public PlayerController()
         {
             exploreState = new ExploreState(this);
-            batttleState = new BattleState(this);
+            battleState = new BattleState(this);
             currentState = exploreState;
         }
 
@@ -115,7 +115,7 @@ namespace Project_CS.Player
 
         public IState GetBattleState()
         {
-            return batttleState;
+            return battleState;
         }
 
         public IState GetCurrentState()
