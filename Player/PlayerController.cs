@@ -82,6 +82,11 @@ namespace Project_CS.Player
         {
             return batttleState;
         }
+        
+        public IState GetCurrentState()
+        {
+            return currentState;
+        }
 
         public void AddLoot(ILoot loot)
         {

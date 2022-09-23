@@ -4,5 +4,6 @@
     {
         int Explore();
         int Battle();
+        string AsciiCharacter { get; }
     }
 }

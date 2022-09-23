@@ -64,5 +64,21 @@ namespace Project_CS.State
 
             return 0;
         }
+
+        public string AsciiCharacter { get; } = @"                    
+      .::           
+      .!?.          
+    :!JY5Y!         
+  .!?JJYY?5^        
+  ^Y:^JYJ7Y:        
+   :~7Y55J!         
+     !?JJJ:         
+     ~?!?J:         
+     !?:??          
+    .?~.J!          
+    .J:.J~          
+    .?^.J!          
+     ~^.!!^         
+";
     }
 }

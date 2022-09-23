@@ -15,7 +15,7 @@ namespace Project_CS.State
 
         public int Battle()
         {
-            Console.WriteLine("You try to kill the enemy");
+            Console.WriteLine("You try to kill the enemy | ROUND " + round);
             int maxRandom = 10 - context.GetLevel();
             if (maxRandom < 1)
             {
@@ -37,10 +37,10 @@ namespace Project_CS.State
             round++;
 
 
-            if (round >= 9)
+            if (round > 9)
             {
                 Console.WriteLine("You lost the battle");
-                round = 0;
+                round = 1;
                 context.UpdateState(context.GetExploreState());
             }
 
@@ -49,8 +49,28 @@ namespace Project_CS.State
 
         public int Explore()
         {
-            Console.WriteLine("You can't explore while in combat!");
+            Console.WriteLine("You can't explore while you're in a battle!");
             return 0;
         }
+
+        public string AsciiCharacter { get; } = @"                                        
+                                        
+                              ..        
+                      .       7Y?:      
+                     .!~!?J7!7?5P5?7:   
+                          ...7Y?J5JJ!   
+        ..                    ~J?JYY.   
+      :?Y?       .           .~7???!    
+   :7?5P5?777J?!~!.         ^7~::~!:    
+   !JJ5J?Y7...             :7^.  ^7:    
+   .YYJ?J~                 ::    .~^.   
+    !???7~.               .~^     .::   
+    :!~::~7^              ^^.      !!   
+    :7^  .^7:                           
+   .^~.    ::                           
+   ::.     ^~.                          
+   7!      .^^                          
+                                        
+";
     }
 }

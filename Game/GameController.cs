@@ -45,8 +45,12 @@ namespace Project_CS.Game
             ConsoleKeyInfo key = new ConsoleKeyInfo();
             while (key.Key != ConsoleKey.Q && player.GetLevel() < 10)
             {
+                Console.WriteLine(player.GetCurrentState().AsciiCharacter);
+                Console.WriteLine("______________________________________________");
+                Console.WriteLine("LVL: " + player.GetLevel() + " |  HP: 100 | DEF: 50 | CRED: 0 | $: 0" );
+                Console.WriteLine();
                 Console.WriteLine("L = Look Around, A = Attack, S = Show Inventory, Q = Quit");
-                Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,S,Q]: ");
+                //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,S,Q]: ");
 
                 key = Console.ReadKey();
                 Console.Clear();
