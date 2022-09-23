@@ -14,6 +14,7 @@ namespace Project_CS.Player
         private int exp;
         private int health;
         private int stockInventory;
+        private int inventoryLimit;
         private string name = "";
         Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
 
