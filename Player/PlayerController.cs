@@ -14,7 +14,7 @@ namespace Project_CS.Player
         private int exp;
         private int health;
         private int stockInventory;
-        private int inventoryLimit;
+        private int inventoryLimit = 15;
         private string name = "";
         Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
 
@@ -92,6 +92,28 @@ namespace Project_CS.Player
 
         public void AddLoot(ILoot loot)
         {
+            if (stockInventory == inventoryLimit)
+            {
+            Console.WriteLine("Your inventory is full");
+            Console.WriteLine("What do you want to do ?");
+            Console.WriteLine("1. Delete an item");
+            Console.WriteLine("2. Don't take this item");
+            ConsoleKeyInfo key = new ConsoleKeyInfo;
+            key = Console.ReadKey();
+            switch (key)
+            {
+                case ConsoleKey.D1:
+                    Console.WriteLine("Which item do you want to delete");
+                    return;
+                
+                case ConsoleKey.D2:
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid Input")
+                    return;
+            }
+            }
             if (inventory.Count == 0)
             {
                 inventory.Add(loot, 1);
