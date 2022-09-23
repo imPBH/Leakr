@@ -7,6 +7,10 @@ namespace Project_CS.State
     {
         private PlayerController context;
         private int round = 1;
+        private int successfullHits = 0;
+        private int opponentHealth = 100;
+        private int opponentAttack = 20;
+        private int opponentDefense = 20;
 
         public BattleState(PlayerController context)
         {
@@ -15,36 +19,56 @@ namespace Project_CS.State
 
         public int Battle()
         {
-            Console.WriteLine("You try to kill the enemy | ROUND " + round);
-            int maxRandom = 10 - context.GetLevel();
-            if (maxRandom < 1)
+            Console.WriteLine("You attack the enemy");
+            int ran = new Random().Next(0, 100);
+            if (ran <= opponentDefense)
             {
-                maxRandom = 1;
+                Console.WriteLine("The enemy blocked your attack");
+            }
+            else
+            {
+                opponentHealth -= context.GetAttack();
+                Console.WriteLine("You hit the enemy!");
+                successfullHits++;
             }
 
-            int ran = new Random().Next(0, maxRandom);
-
-            if (ran == 0)
+            if (opponentHealth <= 0)
             {
                 Console.WriteLine("You killed the enemy");
-                int tmp = round;
-                round = 1;
                 context.UpdateState(context.GetExploreState());
+                round = 1;
+                int tmp = successfullHits;
+                successfullHits = 0;
+                opponentHealth = 100;
                 return tmp;
             }
 
-            Console.WriteLine("You failed to kill the enemy");
-            round++;
-
-
-            if (round > 9)
+            Console.WriteLine("The enemy attack you");
+            ran = new Random().Next(0, 100);
+            if (ran <= context.GetDefense())
             {
-                Console.WriteLine("You lost the battle");
-                round = 1;
-                context.UpdateState(context.GetExploreState());
+                Console.WriteLine("You blocked the enemy attack");
+            }
+            else
+            {
+                context.UpdateHealth(context.GetHealth() - opponentAttack);
+                Console.WriteLine("The enemy hit you!");
             }
 
-            return 0;
+            if (context.GetHealth() <= 0)
+            {
+                Console.WriteLine("You died");
+                context.UpdateState(context.GetExploreState());
+                round = 1;
+                successfullHits = 0;
+                opponentHealth = 100;
+                return 0;
+            }
+
+            Console.WriteLine("You try to kill the enemy | ENEMY HEALTh: " + opponentHealth + "HP | ROUND " + round);
+
+            round++;
+            return -1;
         }
 
         public int Explore()

@@ -47,7 +47,7 @@ namespace Project_CS.Game
             {
                 Console.WriteLine(player.GetCurrentState().AsciiCharacter);
                 Console.WriteLine("______________________________________________");
-                Console.WriteLine("LVL: " + player.GetLevel() + $" |  HP: 100 | DEF: 50 | CRED: 0 | $: {player.GetMoney()}" );
+                Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | DEF: {player.GetDefense()} | CRED: 0 | $: {player.GetMoney()}" );
                 Console.WriteLine();
                 Console.WriteLine("L = Look Around, A = Attack, I = Inventory, S = Shop Q = Quit");
                 //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,Q]: ");
@@ -77,15 +77,9 @@ namespace Project_CS.Game
             }
             else if (key == ConsoleKey.A)
             {
-                int rounds = player.Battle();
-                if (rounds > 0)
+                int points = player.Battle();
+                if (points > 0)
                 {
-                    int points = 10 - rounds;
-                    if (points < 0)
-                    {
-                        points = 0;
-                    }
-
                     score += points;
                     Console.WriteLine("You gained " + points + " points!");
                 }

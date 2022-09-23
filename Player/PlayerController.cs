@@ -12,7 +12,9 @@ namespace Project_CS.Player
         private IState batttleState;
         private int level;
         private int exp;
-        private int health;
+        private int health = 100;
+        private int attack = 20;
+        private int defense = 20;
         private int stockInventory;
         private int inventoryLimit = 15;
         private string name = "";
@@ -60,22 +62,22 @@ namespace Project_CS.Player
         {
             return level;
         }
-        
+
         public int GetMoney()
         {
             return money;
         }
-        
+
         public void RemoveMoney(int amount)
         {
             money -= amount;
         }
-        
+
         public void AddMoney(int amount)
         {
             money += amount;
         }
-        
+
         public Dictionary<ILoot, int> GetInventory()
         {
             return inventory;
@@ -89,6 +91,16 @@ namespace Project_CS.Player
         public int GetHealth()
         {
             return health;
+        }
+
+        public int GetAttack()
+        {
+            return attack;
+        }
+
+        public int GetDefense()
+        {
+            return defense;
         }
 
         public string GetName()
@@ -105,7 +117,7 @@ namespace Project_CS.Player
         {
             return batttleState;
         }
-        
+
         public IState GetCurrentState()
         {
             return currentState;
@@ -115,26 +127,27 @@ namespace Project_CS.Player
         {
             if (stockInventory == inventoryLimit)
             {
-            Console.WriteLine("Your inventory is full");
-            Console.WriteLine("What do you want to do ?");
-            Console.WriteLine("1. Delete an item");
-            Console.WriteLine("2. Don't take this item");
-            ConsoleKeyInfo key = new ConsoleKeyInfo();
-            key = Console.ReadKey();
-            switch (key.Key)
-            {
-                case ConsoleKey.D1:
-                    Shop.Sell(this);
-                    return;
-                
-                case ConsoleKey.D2:
-                    return;
+                Console.WriteLine("Your inventory is full");
+                Console.WriteLine("What do you want to do ?");
+                Console.WriteLine("1. Delete an item");
+                Console.WriteLine("2. Don't take this item");
+                ConsoleKeyInfo key = new ConsoleKeyInfo();
+                key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.D1:
+                        Shop.Sell(this);
+                        return;
 
-                default:
-                    Console.WriteLine("Invalid Input");
-                    return;
+                    case ConsoleKey.D2:
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid Input");
+                        return;
+                }
             }
-            }
+
             if (inventory.Count == 0)
             {
                 inventory.Add(loot, 1);
