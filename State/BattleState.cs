@@ -99,6 +99,14 @@ namespace Project_CS.State
                 {
                     gameLevel().IsFinished = true;
                     Console.WriteLine($"Congratulations ! You finished the level {gameLevel().Name}!");
+                    Console.WriteLine("Here is your reward :");
+                    foreach (var game in gameLevel().LeakedGames())
+                    {
+                        context.AddLoot(game);
+                        Console.WriteLine(game.Name);
+                    }
+
+                    Console.WriteLine($"You earned {20 * gameLevel().Level} credibility points");
                     context.UpdateGameLevel(context.GetGameLevel() + 1);
                 }
                 else
