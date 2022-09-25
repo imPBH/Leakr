@@ -25,6 +25,7 @@ namespace Project_CS.Loot
             Console.WriteLine("3. Leave");
             Console.Write("Your choice: ");
             var choice = Console.ReadLine();
+            Console.Clear();
             switch (choice)
             {
                 case "1":
@@ -36,6 +37,7 @@ namespace Project_CS.Loot
                 case "3":
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Invalid choice");
                     Menu(player);
                     break;
@@ -45,14 +47,26 @@ namespace Project_CS.Loot
         private static void Buy(PlayerController player)
         {
             Console.WriteLine("What do you want to buy?");
-            Console.WriteLine("0. Back to home");
+            Console.WriteLine();
             foreach (var loot in availableLoot)
             {
                 Console.WriteLine($"{availableLoot.IndexOf(loot) + 1}. {loot.Name} - ${loot.BuyPrice}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("0. Back to home");
             Console.Write("Your choice: ");
             var choice = Console.ReadLine();
+            int choiceInt;
+            bool isParsable = Int32.TryParse(choice, out choiceInt);
+            if (!isParsable)
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid choice");
+                Buy(player);
+                return;
+            }
+
             if (choice == "0")
             {
                 return;
@@ -61,6 +75,7 @@ namespace Project_CS.Loot
             var lootIndex = int.Parse(choice) - 1;
             if (lootIndex < 0 || lootIndex >= availableLoot.Count)
             {
+                Console.Clear();
                 Console.WriteLine("Invalid choice");
                 Buy(player);
                 return;
@@ -69,6 +84,7 @@ namespace Project_CS.Loot
             var wantedLoot = availableLoot[lootIndex];
             if (player.GetMoney() < wantedLoot.BuyPrice)
             {
+                Console.Clear();
                 Console.WriteLine("You don't have enough money");
                 Buy(player);
                 return;
@@ -88,12 +104,14 @@ namespace Project_CS.Loot
             }
 
             Console.WriteLine("What do you want to sell?");
-            Console.WriteLine("0. Back to home");
+            Console.WriteLine();
             foreach (var playerLoot in player.GetInventory())
             {
                 Console.WriteLine($"{playerLoot.Key.Name}. - ${playerLoot.Key.SellPrice}");
             }
 
+            Console.WriteLine();
+            Console.WriteLine("0. Back to home");
             Console.Write("Your choice: ");
             var choice = Console.ReadLine();
             if (choice == "0")
@@ -112,6 +130,7 @@ namespace Project_CS.Loot
                 }
             }
 
+            Console.Clear();
             Console.WriteLine("Invalid choice");
             Sell(player);
         }

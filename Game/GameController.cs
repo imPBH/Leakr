@@ -8,7 +8,6 @@ namespace Project_CS.Game
     public class GameController
     {
         static PlayerController player = new PlayerController();
-        static int score;
         static int nextLevel = 10;
 
         public void Start()
@@ -29,15 +28,15 @@ namespace Project_CS.Game
                 Console.WriteLine(line);
             PrintSlowly("Welcome to the game!");
             PrintSlowly("You are a leaker, your goal is to infiltrate game companies and leak their games.");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             PrintSlowly("But be careful, the game companies are trying to stop you!");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             PrintSlowly("You'll have to avoid their security and their lawyers.");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             PrintSlowly("While you're exploring the game companies, you'll find some items that will help you.");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             PrintSlowly("Each leaked game will give you credibility.");
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             PrintSlowly("If you lose against a game company, you'll lose credibility, and you'll have to pay a fine.");
             Console.WriteLine("Press any key to start");
             Console.ReadKey();
@@ -47,7 +46,7 @@ namespace Project_CS.Game
             {
                 Console.WriteLine(player.GetCurrentState().AsciiCharacter);
                 Console.WriteLine("________________________________________________________");
-                Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | ATK: {player.GetAttack()} | DEF: {player.GetDefense()} | CRED: 0 | $: {player.GetMoney()}" );
+                Console.WriteLine($"LVL: {player.GetLevel()} |  HP: {player.GetHealth()} | ATK: {player.GetAttack()} | DEF: {player.GetDefense()} | CRED: {player.GetCredibility()} | $: {player.GetMoney()}" );
                 Console.WriteLine();
                 Console.WriteLine("L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop, W = Wearing List, Q = Quit");
                 //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,U,W,Q]: ");
@@ -60,7 +59,7 @@ namespace Project_CS.Game
             if (player.GetLevel() == 10)
             {
                 Console.WriteLine();
-                Console.WriteLine("You win! Your score is " + score);
+                Console.WriteLine("You win!");
             }
         }
 
@@ -69,10 +68,10 @@ namespace Project_CS.Game
             if (key == ConsoleKey.L)
             {
                 int points = player.Explore();
+                player.UpdateCredibility(player.GetCredibility() + points);
                 if (points > 0)
                 {
-                    Console.WriteLine("You gained " + points + " points!");
-                    score += points;
+                    Console.WriteLine("You gained " + points + " credibility!");
                 }
             }
             else if (key == ConsoleKey.A)
@@ -80,8 +79,8 @@ namespace Project_CS.Game
                 int points = player.Battle();
                 if (points > 0)
                 {
-                    score += points;
-                    Console.WriteLine("You gained " + points + " points!");
+                    player.UpdateCredibility(player.GetCredibility() + points);
+                    Console.WriteLine("You gained " + points + " credibility!");
                 }
             }
             else if (key == ConsoleKey.I)
@@ -102,7 +101,7 @@ namespace Project_CS.Game
                 }
             }
 
-            if (score >= nextLevel)
+            if (player.GetCredibility() >= nextLevel)
             {
                 player.UpdateLevel(player.GetLevel() + 1);
                 nextLevel += player.GetLevel() * 10;
@@ -116,7 +115,7 @@ namespace Project_CS.Game
             foreach (char l in print)
             {
                 Console.Write(l);
-                Thread.Sleep(10); // sleep for 10 milliseconds    
+                Thread.Sleep(5); // sleep for 10 milliseconds    
             }
 
             Console.Write("\n");
