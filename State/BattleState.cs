@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Project_CS.Entity;
+using Project_CS.Game;
+using Project_CS.Level;
 using Project_CS.Player;
 using Project_CS.Loot;
 
@@ -11,15 +14,22 @@ namespace Project_CS.State
         private PlayerController context;
         private int round = 1;
         private int successfullHits = 0;
-        private int opponentHealth = 100;
-        private int opponentAttack = 20;
-        private int opponentDefense = 20;
+
+        private ILevel gameLevel()
+        {
+            return GameLevels.GetLevel(context.GetGameLevel());
+        }
+
+        private IEntity opponent()
+        {
+            return gameLevel().GetOpponent();
+        }
 
         public BattleState(PlayerController context)
         {
             this.context = context;
         }
-        
+
         private void addSpentLifeToItems()
         {
             List<ILoot> items = context.GetWearingList().ToList();
@@ -31,33 +41,34 @@ namespace Project_CS.State
 
         private void playerAttackAction()
         {
-            Console.WriteLine("You attack the enemy");
+            Console.WriteLine($"You attack the {opponent().Name}");
             int ran = new Random().Next(0, 100);
-            if (ran <= opponentDefense)
+            if (ran <= opponent().Defense)
             {
-                Console.WriteLine("The enemy blocked your attack");
+                Console.WriteLine($"The {opponent().Name} blocked your attack");
             }
             else
             {
-                opponentHealth -= context.GetAttack();
-                Console.WriteLine("You hit the enemy!");
+                opponent().Health -= context.GetAttack();
+                Console.WriteLine($"You hit the {opponent().Name}!");
                 successfullHits++;
             }
         }
 
         private void opponentAttackAction()
         {
-            Console.WriteLine("The enemy attack you");
+            Console.WriteLine($"The {opponent().Name} attack you");
             int ran = new Random().Next(0, 100);
             if (ran <= context.GetDefense())
             {
-                Console.WriteLine("You blocked the enemy attack");
+                Console.WriteLine($"You blocked the {opponent().Name} attack");
             }
             else
             {
-                context.UpdateHealth(context.GetHealth() - opponentAttack);
-                Console.WriteLine("The enemy hit you!");
+                context.UpdateHealth(context.GetHealth() - opponent().Attack);
+                Console.WriteLine($"The {opponent().Name} hit you!");
             }
+
             addSpentLifeToItems();
         }
 
@@ -65,24 +76,36 @@ namespace Project_CS.State
         {
             if (context.GetHealth() <= 0)
             {
-                Console.WriteLine("You died");
+                Console.WriteLine("You died ! After a good nap, you heal and continue your quest");
+                context.UpdateHealth(100);
                 context.UpdateState(context.GetExploreState());
                 round = 1;
                 successfullHits = 0;
-                opponentHealth = 100;
+                //opponent().Reset();
                 return 0;
             }
-            
+
             playerAttackAction();
 
-            if (opponentHealth <= 0)
+            if (opponent().Health <= 0)
             {
-                Console.WriteLine("You killed the enemy");
+                Console.WriteLine($"You killed the {opponent().Name}");
                 context.UpdateState(context.GetExploreState());
                 round = 1;
                 int tmp = successfullHits;
                 successfullHits = 0;
-                opponentHealth = 100;
+                opponent().Reset();
+                if (gameLevel().IsLastSubLevel())
+                {
+                    gameLevel().IsFinished = true;
+                    Console.WriteLine($"Congratulations ! You finished the level {gameLevel().Name}!");
+                    context.UpdateGameLevel(context.GetGameLevel() + 1);
+                }
+                else
+                {
+                    gameLevel().NextSubLevel();
+                }
+
                 return tmp;
             }
 
@@ -90,15 +113,17 @@ namespace Project_CS.State
 
             if (context.GetHealth() <= 0)
             {
-                Console.WriteLine("You died");
+                Console.WriteLine("You died ! After a good nap, you heal and continue your quest");
+                context.UpdateHealth(100);
                 context.UpdateState(context.GetExploreState());
                 round = 1;
                 successfullHits = 0;
-                opponentHealth = 100;
+                //opponent().Reset();
                 return 0;
             }
 
-            Console.WriteLine("You try to kill the enemy | ENEMY HEALTh: " + opponentHealth + "HP | ROUND " + round);
+            Console.WriteLine(
+                $"You try to kill the {opponent().Name} | ENEMY HEALTH: {opponent().Health} HP | ROUND: {round}");
 
             round++;
             return -1;
@@ -136,8 +161,10 @@ namespace Project_CS.State
             {
                 return 0;
             }
+
             opponentAttackAction();
-            Console.WriteLine("You try to kill the enemy | ENEMY HEALTh: " + opponentHealth + "HP | ROUND " + round);
+            Console.WriteLine(
+                $"You try to kill the {opponent().Name} | ENEMY HEALTH: {opponent().Health} HP | ROUND: {round}");
             return 1;
         }
     }
