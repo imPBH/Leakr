@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project_CS.Entity;
+using Project_CS.Loot;
 
 namespace Project_CS.Level
 {
@@ -16,5 +17,6 @@ namespace Project_CS.Level
         
         public IEntity GetOpponent();
         public int NextSubLevel();
+        public List<ILoot> LeakedGames();
     }
 }

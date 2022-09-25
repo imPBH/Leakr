@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project_CS.Entity;
+using Project_CS.Loot;
 
 namespace Project_CS.Level
 {
@@ -35,10 +36,19 @@ namespace Project_CS.Level
             this.IsFinished = true;
             return 0;
         }
-        
+
         public bool IsLastSubLevel()
         {
             return SubLevel == MaxSubLevel;
+        }
+
+        public List<ILoot> LeakedGames()
+        {
+            List<ILoot> games = new List<ILoot>()
+            {
+                new CODWarzoneSourceCode()
+            };
+            return games;
         }
     }
 }
