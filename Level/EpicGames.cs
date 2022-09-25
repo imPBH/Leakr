@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Project_CS.Entity;
+using Project_CS.Loot;
 
 namespace Project_CS.Level
 {
@@ -39,6 +40,15 @@ namespace Project_CS.Level
         public bool IsLastSubLevel()
         {
             return SubLevel == MaxSubLevel;
+        }
+
+        public List<ILoot> LeakedGames()
+        {
+            List<ILoot> games = new List<ILoot>()
+            {
+                new FortniteSourceCode()
+            };
+            return games;
         }
     }
 }
