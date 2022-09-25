@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Project_CS.Level;
 using Project_CS.State;
 using Project_CS.Loot;
 
@@ -10,7 +11,8 @@ namespace Project_CS.Player
         private IState currentState;
         private IState exploreState;
         private IState battleState;
-        private int level;
+        private int playerLevel;
+        private int gameLevel;
         private int credibilty;
         private int health = 100;
         private int attack = 20;
@@ -44,9 +46,9 @@ namespace Project_CS.Player
             currentState = newState;
         }
 
-        public void UpdateLevel(int newLevel)
+        public void UpdatePlayerLevel(int newLevel)
         {
-            level = newLevel;
+            playerLevel = newLevel;
         }
 
         public void UpdateCredibility(int newCredibility)
@@ -69,9 +71,19 @@ namespace Project_CS.Player
             defense = newDefense;
         }
 
-        public int GetLevel()
+        public int GetPlayerLevel()
         {
-            return level;
+            return playerLevel;
+        }
+        
+        public int GetGameLevel()
+        {
+            return gameLevel;
+        }
+        
+        public void UpdateGameLevel(int newLevel)
+        {
+            gameLevel = newLevel;
         }
 
         public int GetMoney()
@@ -202,6 +214,12 @@ namespace Project_CS.Player
 
         public void ShowInventory()
         {
+            if (inventory.Count == 0)
+            {
+                Console.WriteLine("Your inventory is empty");
+                return;
+            }
+            
             foreach (KeyValuePair<ILoot, int> loot in inventory)
             {
                 Console.WriteLine(loot.Key.Name + " x" + loot.Value);
