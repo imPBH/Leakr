@@ -11,7 +11,7 @@ namespace Project_CS.Player
         private IState exploreState;
         private IState battleState;
         private int level;
-        private int exp;
+        private int credibilty;
         private int health = 100;
         private int attack = 20;
         private int defense = 20;
@@ -49,9 +49,9 @@ namespace Project_CS.Player
             level = newLevel;
         }
 
-        public void UpdateExp(int newExp)
+        public void UpdateCredibility(int newCredibility)
         {
-            exp = newExp;
+            credibilty = newCredibility;
         }
 
         public void UpdateHealth(int newHealth)
@@ -94,9 +94,9 @@ namespace Project_CS.Player
             return inventory;
         }
 
-        public int GetExp()
+        public int GetCredibility()
         {
-            return exp;
+            return credibilty;
         }
 
         public int GetHealth()
@@ -138,23 +138,24 @@ namespace Project_CS.Player
         {
             if (stockInventory == inventoryLimit)
             {
+                Console.Clear();
                 Console.WriteLine("Your inventory is full");
                 Console.WriteLine("What do you want to do ?");
-                Console.WriteLine("1. Delete an item");
+                Console.WriteLine("1. Sell an item");
                 Console.WriteLine("2. Don't take this item");
-                ConsoleKeyInfo key = new ConsoleKeyInfo();
-                key = Console.ReadKey();
-                switch (key.Key)
+                var choice = Console.ReadLine();
+                switch (choice)
                 {
-                    case ConsoleKey.D1:
+                    case "1":
                         Shop.Sell(this);
                         return;
 
-                    case ConsoleKey.D2:
+                    case "2":
                         return;
 
                     default:
                         Console.WriteLine("Invalid Input");
+                        AddLoot(loot);
                         return;
                 }
             }
