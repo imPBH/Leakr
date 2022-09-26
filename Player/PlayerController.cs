@@ -18,9 +18,9 @@ namespace Project_CS.Player
         private int attack = 20;
         private int defense = 20;
         private int stockInventory;
-        private int inventoryLimit = 15;
+        private int inventoryLimit = 25;
         private string name = "";
-        private int money;
+        private int money = 40;
         private Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
         private List<ILoot> wearingList = new List<ILoot>();
 
@@ -60,12 +60,12 @@ namespace Project_CS.Player
         {
             health = newHealth;
         }
-        
+
         public void UpdateAttack(int newAttack)
         {
             attack = newAttack;
         }
-        
+
         public void UpdateDefense(int newDefense)
         {
             defense = newDefense;
@@ -75,12 +75,12 @@ namespace Project_CS.Player
         {
             return playerLevel;
         }
-        
+
         public int GetGameLevel()
         {
             return gameLevel;
         }
-        
+
         public void UpdateGameLevel(int newLevel)
         {
             gameLevel = newLevel;
@@ -146,7 +146,7 @@ namespace Project_CS.Player
             return currentState;
         }
 
-        public void AddLoot(ILoot loot)
+        public int AddLoot(ILoot loot)
         {
             if (stockInventory == inventoryLimit)
             {
@@ -160,15 +160,15 @@ namespace Project_CS.Player
                 {
                     case "1":
                         Shop.Sell(this);
-                        return;
+                        return 1;
 
                     case "2":
-                        return;
+                        return 0;
 
                     default:
                         Console.WriteLine("Invalid Input");
                         AddLoot(loot);
-                        return;
+                        return 0;
                 }
             }
 
@@ -176,6 +176,7 @@ namespace Project_CS.Player
             {
                 inventory.Add(loot, 1);
                 stockInventory++;
+                return 1;
             }
             else
             {
@@ -185,12 +186,13 @@ namespace Project_CS.Player
                     {
                         inventory[item.Key] += 1;
                         stockInventory++;
-                        return;
+                        return 1;
                     }
                 }
 
                 inventory.Add(loot, 1);
                 stockInventory++;
+                return 1;
             }
         }
 
@@ -219,7 +221,7 @@ namespace Project_CS.Player
                 Console.WriteLine("Your inventory is empty");
                 return;
             }
-            
+
             foreach (KeyValuePair<ILoot, int> loot in inventory)
             {
                 Console.WriteLine(loot.Key.Name + " x" + loot.Value);
@@ -230,7 +232,7 @@ namespace Project_CS.Player
         {
             currentState.UseItem();
         }
-        
+
         public int WearItem(ILoot item)
         {
             int nbOfItem = 0;
@@ -241,20 +243,22 @@ namespace Project_CS.Player
                     nbOfItem++;
                 }
             }
+
             if (nbOfItem >= item.MaxUses)
             {
                 Console.WriteLine("You can't wear more than " + item.MaxUses + " " + item.Name);
                 return 0;
             }
+
             wearingList.Add(item);
             return 1;
         }
-        
+
         public void RemoveWearingItem(ILoot item)
         {
             wearingList.Remove(item);
         }
-        
+
         public List<ILoot> GetWearingList()
         {
             return wearingList;
