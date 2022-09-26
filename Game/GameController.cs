@@ -37,8 +37,6 @@ namespace Project_CS.Game
             PrintSlowly("While you're exploring the game companies, you'll find some items that will help you.");
             Thread.Sleep(500);
             PrintSlowly("Each leaked game will give you credibility.");
-            Thread.Sleep(500);
-            PrintSlowly("If you lose against a game company, you'll lose credibility, and you'll have to pay a fine.");
             Console.WriteLine("Press any key to start");
             Console.ReadKey();
             Console.Clear();
