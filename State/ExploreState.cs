@@ -22,16 +22,16 @@ namespace Project_CS.State
         public int Explore()
         {
             Console.WriteLine("Looking around...");
-            int random = new Random().Next(0, 10);
+            int random = new Random().Next(0, 100);
 
-            if (random > 6)
+            if (random > 70)
             {
                 Console.WriteLine("You found an enemy!");
                 context.UpdateState(context.GetBattleState());
                 return 0;
             }
 
-            if (random > 3)
+            if (random > 40)
             {
                 Console.WriteLine("There is nothing to see...");
                 return 0;
@@ -39,21 +39,29 @@ namespace Project_CS.State
 
             if (random >= 0)
             {
-                int randomLoot = new Random().Next(0, 16);
-                if (randomLoot > 10)
+                int randomLoot = new Random().Next(0, 100);
+                if (randomLoot > 85)
                 {
                     Console.WriteLine("You found a super potion!");
                     context.AddLoot(new SuperPotion());
-                    return 2;
+                    return 5;
                 }
-                if (randomLoot > 6)
+
+                if (randomLoot > 70)
                 {
                     Console.WriteLine("You found a potion!");
                     context.AddLoot(new Potion());
-                    return 2;
+                    return 4;
                 }
 
-                if (randomLoot > 3)
+                if (randomLoot > 50)
+                {
+                    Console.WriteLine("You found a mechanical keyboard!");
+                    context.AddLoot(new MechanicalKeyboard());
+                    return 3;
+                }
+
+                if (randomLoot > 25)
                 {
                     Console.WriteLine("You found a Discord Nitro membership!");
                     context.AddLoot(new DiscordNitro());
@@ -64,7 +72,7 @@ namespace Project_CS.State
                 {
                     Console.WriteLine("You found a deodorant!");
                     context.AddLoot(new Deodorant());
-                    return 2;
+                    return 1;
                 }
             }
 
