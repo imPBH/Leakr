@@ -10,7 +10,7 @@ namespace Project_CS.Loot
         public int Defense { get; } = 2;
         public int BuyPrice { get; } = 5;
         public int SellPrice { get; } = 3;
-        
+
         public int MaxUses { get; } = 4;
         private int lifeTime = 2;
         private int spentLife = 0;
@@ -21,6 +21,7 @@ namespace Project_CS.Loot
             {
                 return;
             }
+
             Console.WriteLine("You smell better now.");
             player.UpdateDefense(player.GetDefense() + Defense);
             player.RemoveLoot(this);
@@ -32,7 +33,7 @@ namespace Project_CS.Loot
             player.UpdateDefense(player.GetDefense() - Defense);
             player.RemoveWearingItem(this);
         }
-        
+
         public void AddSpentLife(PlayerController player)
         {
             spentLife++;

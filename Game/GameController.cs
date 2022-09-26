@@ -11,6 +11,7 @@ namespace Project_CS.Game
         static PlayerController player = new PlayerController();
         static int nextLevel = 10;
         private ILevel gameLevel = GameLevels.GetLevel(player.GetGameLevel());
+
         public void Start()
         {
             var arr = new[]
@@ -44,10 +45,15 @@ namespace Project_CS.Game
             while (!GameLevels.GetLastLevel().IsFinished)
             {
                 Console.WriteLine(player.GetCurrentState().AsciiCharacter);
-                Console.WriteLine("____________________________________________________________________________________________");
-                Console.WriteLine($"GAME LVL: {GameLevels.GetLevel(player.GetGameLevel()).Name} | PLAYER LVL: {player.GetPlayerLevel()} |  HP: {player.GetHealth()} | ATK: {player.GetAttack()} | DEF: {player.GetDefense()} | CRED: {player.GetCredibility()} | $: {player.GetMoney()}" );
+                Console.WriteLine(
+                    "____________________________________________________________________________________________");
+                Console.WriteLine(
+                    $"GAME LVL: {GameLevels.GetLevel(player.GetGameLevel()).Name} | PLAYER LVL: {player.GetPlayerLevel()} |"
+                    + $"  HP: {player.GetHealth()} | ATK: {player.GetAttack()} | DEF: {player.GetDefense()} "
+                    + $"| CRED: {player.GetCredibility()} | $: {player.GetMoney()}");
                 Console.WriteLine();
-                Console.WriteLine("L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop, W = Wearing List, Q = Quit");
+                Console.WriteLine(
+                    "L = Look Around, A = Attack, I = Inventory, U = Use Item, S = Shop, W = Wearing List, Q = Quit");
                 //Console.Write("Score [" + score + "] Level [" + player.GetLevel() + "] Action [L,A,I,S,U,W,Q]: ");
 
                 key = Console.ReadKey();
@@ -59,7 +65,8 @@ namespace Project_CS.Game
             {
                 Console.WriteLine();
                 Console.WriteLine("Congratulations ! You have leaked all the games !");
-                Console.WriteLine("You finished the game with " + player.GetCredibility() + " credibility, " + player.GetMoney() + " dollars and " + player.GetPlayerLevel() + " player level.");
+                Console.WriteLine("You finished the game with " + player.GetCredibility() + " credibility, " +
+                                  player.GetMoney() + " dollars and " + player.GetPlayerLevel() + " player level.");
             }
         }
 
@@ -90,17 +97,20 @@ namespace Project_CS.Game
             else if (key == ConsoleKey.S)
             {
                 Shop.Menu(player);
-            } else if (key == ConsoleKey.U)
+            }
+            else if (key == ConsoleKey.U)
             {
                 player.UseItem();
-            } else if (key == ConsoleKey.W)
+            }
+            else if (key == ConsoleKey.W)
             {
                 Console.WriteLine("Wearing List:");
                 foreach (var item in player.GetWearingList())
                 {
                     Console.WriteLine(item.Name);
                 }
-            } else if (key == ConsoleKey.Q)
+            }
+            else if (key == ConsoleKey.Q)
             {
                 System.Environment.Exit(0);
             }

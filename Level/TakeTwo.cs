@@ -38,7 +38,7 @@ namespace Project_CS.Level
             this.IsFinished = true;
             return 0;
         }
-        
+
         public bool IsLastSubLevel()
         {
             return SubLevel == MaxSubLevel;

@@ -19,7 +19,6 @@ namespace Project_CS.Player
         private int defense = 20;
         private int stockInventory;
         private int inventoryLimit = 25;
-        private string name = "";
         private int money = 40;
         private Dictionary<ILoot, int> inventory = new Dictionary<ILoot, int>();
         private List<ILoot> wearingList = new List<ILoot>();
@@ -126,11 +125,6 @@ namespace Project_CS.Player
             return defense;
         }
 
-        public string GetName()
-        {
-            return name;
-        }
-
         public IState GetExploreState()
         {
             return exploreState;
@@ -178,22 +172,20 @@ namespace Project_CS.Player
                 stockInventory++;
                 return 1;
             }
-            else
-            {
-                foreach (KeyValuePair<ILoot, int> item in inventory)
-                {
-                    if (item.Key.Name == loot.Name)
-                    {
-                        inventory[item.Key] += 1;
-                        stockInventory++;
-                        return 1;
-                    }
-                }
 
-                inventory.Add(loot, 1);
-                stockInventory++;
-                return 1;
+            foreach (KeyValuePair<ILoot, int> item in inventory)
+            {
+                if (item.Key.Name == loot.Name)
+                {
+                    inventory[item.Key] += 1;
+                    stockInventory++;
+                    return 1;
+                }
             }
+
+            inventory.Add(loot, 1);
+            stockInventory++;
+            return 1;
         }
 
         public void RemoveLoot(ILoot loot)

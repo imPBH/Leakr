@@ -14,12 +14,14 @@ namespace Project_CS.Loot
         public int MaxUses { get; } = 5;
         private int lifeTime = 5;
         private int spentLife = 0;
+
         public void Use(PlayerController player)
         {
             if (player.WearItem(new MechanicalKeyboard()) == 0)
             {
                 return;
             }
+
             Console.WriteLine("You used the Mechanical Keyboard");
             player.UpdateAttack(player.GetAttack() + Attack);
             player.RemoveLoot(this);
@@ -31,7 +33,7 @@ namespace Project_CS.Loot
             player.UpdateAttack(player.GetAttack() - Attack);
             player.RemoveWearingItem(this);
         }
-        
+
         public void AddSpentLife(PlayerController player)
         {
             spentLife++;
