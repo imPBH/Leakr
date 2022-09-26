@@ -95,6 +95,8 @@ namespace Project_CS.State
                 int tmp = successfullHits;
                 successfullHits = 0;
                 opponent().Reset();
+                Console.WriteLine($"You earned ${tmp * 3}");
+                context.AddMoney(tmp * 3);
                 if (gameLevel().IsLastSubLevel())
                 {
                     gameLevel().IsFinished = true;
