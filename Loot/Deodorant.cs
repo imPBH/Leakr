@@ -8,16 +8,16 @@ namespace Project_CS.Loot
         public string Name { get; } = "Deodorant";
         public int Attack { get; } = 0;
         public int Defense { get; } = 2;
-        public int BuyPrice { get; } = 10;
-        public int SellPrice { get; } = 5;
+        public int BuyPrice { get; } = 5;
+        public int SellPrice { get; } = 3;
         
-        public int MaxUses { get; } = 1;
-        private int lifeTime = 1;
+        public int MaxUses { get; } = 4;
+        private int lifeTime = 2;
         private int spentLife = 0;
 
         public void Use(PlayerController player)
         {
-            if (player.WearItem(this) == 0)
+            if (player.WearItem(new Deodorant()) == 0)
             {
                 return;
             }

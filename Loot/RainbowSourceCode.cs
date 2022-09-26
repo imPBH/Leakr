@@ -9,7 +9,7 @@ namespace Project_CS.Loot
         public int Attack { get;} = 0;
         public int Defense { get;} = 0;
         public int BuyPrice { get;} = 0;
-        public int SellPrice { get;} = 30;
+        public int SellPrice { get;} = 50;
         public int MaxUses { get;} = 1;
 
         public void Use(PlayerController player)

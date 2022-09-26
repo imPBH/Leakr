@@ -6,17 +6,17 @@ namespace Project_CS.Loot
     public class MechanicalKeyboard : ILoot
     {
         public string Name { get; } = "Mechanical Keyboard";
-        public int Attack { get; } = 1;
-        public int Defense { get; } = 0;
-        public int BuyPrice { get; } = 8;
-        public int SellPrice { get; } = 4;
+        public int Attack { get; } = 2;
+        public int Defense { get; } = 2;
+        public int BuyPrice { get; } = 6;
+        public int SellPrice { get; } = 3;
 
-        public int MaxUses { get; } = 1;
-        private int lifeTime = 3;
+        public int MaxUses { get; } = 5;
+        private int lifeTime = 5;
         private int spentLife = 0;
         public void Use(PlayerController player)
         {
-            if (player.WearItem(this) == 0)
+            if (player.WearItem(new MechanicalKeyboard()) == 0)
             {
                 return;
             }

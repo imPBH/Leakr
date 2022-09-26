@@ -7,16 +7,16 @@ namespace Project_CS.Loot
     {
         public string Name { get; } = "Discord Nitro";
         public int Attack { get; } = 2;
-        public int Defense { get; } = 0;
-        public int BuyPrice { get; } = 10;
-        public int SellPrice { get; } = 5;
+        public int Defense { get; } = 1;
+        public int BuyPrice { get; } = 5;
+        public int SellPrice { get; } = 3;
         
-        public int MaxUses { get; } = 1;
-        private int lifeTime = 2;
+        public int MaxUses { get; } = 5;
+        private int lifeTime = 6;
         private int spentLife = 0;
         public void Use(PlayerController player)
         {
-            if (player.WearItem(this) == 0)
+            if (player.WearItem(new DiscordNitro()) == 0)
             {
                 return;
             }

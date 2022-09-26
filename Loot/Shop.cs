@@ -90,9 +90,11 @@ namespace Project_CS.Loot
                 return;
             }
 
-            player.AddLoot(wantedLoot);
-            player.RemoveMoney(wantedLoot.BuyPrice);
-            Console.WriteLine($"You bought {wantedLoot.Name}");
+            if (player.AddLoot(wantedLoot) == 1)
+            {
+                player.RemoveMoney(wantedLoot.BuyPrice);
+                Console.WriteLine($"You bought {wantedLoot.Name}");
+            }
         }
 
         public static void Sell(PlayerController player)
