@@ -15,20 +15,20 @@ You start the game with $40.
 You can loot some items in the game, each one has a percentage of chance to be found.
 Here is the table of the items you can find in the game and their percentage of chance to be found.
 
-![Loot table](http://image.noelshack.com/fichiers/2022/39/1/1664179558-capture-d-ecran-2022-09-26-100520.png)
+![Loot chances](https://user-images.githubusercontent.com/59230262/216296678-068057da-de5d-451e-b30f-78e208568807.png)
 
 Here are the specs of the items you can find in the game.
 
-![Loot specs](http://image.noelshack.com/fichiers/2022/39/1/1664179628-capture-d-ecran-2022-09-26-100702.png)
+![Loot specs](https://user-images.githubusercontent.com/59230262/216296494-3ceb066c-43e2-4f6e-9de4-3b9d350903c2.png)
 
 ### Enemies
 You will encounter some enemies in the game, here are the specs of the enemies you can find in the game.
 
-![Enemies specs](http://image.noelshack.com/fichiers/2022/39/1/1664179708-capture-d-ecran-2022-09-26-100818.png)
+![Enemies specs](https://user-images.githubusercontent.com/59230262/216296813-2015b4e6-6aee-4adb-8008-0394459b8084.png)
 
 ### Levels
 
 Each level is happening in a different game company.
 Here is the list of the game companies you will encounter in the game and what you can find in them.
 
-![Levels](http://image.noelshack.com/fichiers/2022/39/1/1664179793-capture-d-ecran-2022-09-26-100947.png)
+![Levels](https://user-images.githubusercontent.com/59230262/216296913-dbccaade-99ad-495a-9ae0-3a85dfe223d7.png)
